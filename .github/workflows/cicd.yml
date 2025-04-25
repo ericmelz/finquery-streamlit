@@ -2,9 +2,9 @@ name: Run Tests
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 env:
   REGISTRY: ghcr.io
@@ -72,7 +72,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     environment: prod
-    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
 
     steps:
       - name: Checkout Repository
