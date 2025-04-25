@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finquery
+  labels:
+    app: finquery
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: finquery
+  template:
+    metadata:
+      labels:
+        app: finquery
+    spec:
+      volumes:
+        - name: encrypted-conf
+          persistentVolumeClaim:
+            claimName: pvc-finquery-conf
+        - name: decrypted-conf
+          emptyDir: {}
+      initContainers:
+        - name: decrypt-env
+          image: safesecurity/gpg:latest
+          command:
+            - sh
+            - -c
+            - |
+              set -e
+              gpg --batch --yes \
+                --passphrase="$GPG_PASSPHRASE" \
+                -o /mnt/decrypted/.env \
+                -d /mnt/secrets/.env.${DEPLOYMENT_ENV}.gpg
+          args:
+          env:
+            - name: GPG_PASSPHRASE
+              valueFrom:
+                secretKeyRef:
+                  name: gpg-passphrase
+                  key: GPG_PASSPHRASE
+            - name: DEPLOYMENT_ENV
+              value: dev
+          volumeMounts:
+            - name: encrypted-conf
+              mountPath: /mnt/secrets
+              readOnly: true
+            - name: decrypted-conf
+              mountPath: /mnt/decrypted
+      containers:
+      - name: finquery
+        image: finquery:latest
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: FINQUERY_CONF_FILE
+            value: /mnt/decrypted/.env
+        volumeMounts:
+          - name: decrypted-conf
+            mountPath: /mnt/decrypted
+            readOnly: true
+        args:
+          - "--server.baseUrlPath"
+          - "/finquery"
+        ports:
+        - containerPort: 8501
+          name: web
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: "512Mi"
+          requests:
+            cpu: "0.1"
+            memory: "256Mi"
+        readinessProbe:
+          httpGet:
+            path: /finquery/_stcore/health
+            port: 8501
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /finquery/_stcore/health
+            port: 8501
+          initialDelaySeconds: 5
+          periodSeconds: 5
