@@ -119,5 +119,5 @@ visit http://localhost:8899/finquery/
 
 ### Destroy cluster
 ```bash
-k3d cluster delete calculator
+k3d cluster delete finquery
 ```
