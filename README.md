@@ -41,7 +41,7 @@ Edit `var/conf/finquery/.env` with your values
 
 ### Run the app
 ```bash
-uv run streamlit run src/app.py
+uv run streamlit run src/finquery_streamlit/app.py
 ^c
 ```
 
