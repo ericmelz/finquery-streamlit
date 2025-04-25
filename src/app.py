@@ -7,6 +7,7 @@ import plotly.graph_objects as go
 import pandas as pd
 
 from orchestrator import Orchestrator
+from src.settings import Settings
 
 st.set_page_config(
     page_title="Finquery",
@@ -25,6 +26,9 @@ if "connection_status" not in st.session_state:
 with st.sidebar:
     st.header("DATABASE CONFIGURATION")
     st.markdown("Enter MySQL connection details:")
+
+    env_file = os.getenv("FINQUERY_CONF_FILE", "var/conf/finquery/.env")
+    settings = Settings(_env_file=env_file, _env_file_encoding="utf-8")
 
     db_user = st.text_input("User", value=st.secrets["DB_USER"])
     db_pass = st.text_input("Password", type="password", value=st.secrets["DB_PASS"], key="db_pass")
