@@ -4,9 +4,9 @@ from pydantic import SecretStr
 
 class Settings(BaseSettings):
     openai_api_key: SecretStr
-    model: str
-    db_user: str
-    db_pass: str
-    db_host: str
-    db_port: int
-    db_name: str
+    openai_llm_model: str
+    db_user: SecretStr
+    db_pass: SecretStr
+    db_host: SecretStr
+    db_port: SecretStr
+    db_name: SecretStr

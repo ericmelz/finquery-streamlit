@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 import pandas as pd
 
 from orchestrator import Orchestrator
-from src.settings import Settings
+from settings import Settings
 
 st.set_page_config(
     page_title="Finquery",
@@ -30,13 +30,13 @@ with st.sidebar:
     env_file = os.getenv("FINQUERY_CONF_FILE", "var/conf/finquery/.env")
     settings = Settings(_env_file=env_file, _env_file_encoding="utf-8")
 
-    db_user = st.text_input("User", value=st.secrets["DB_USER"])
-    db_pass = st.text_input("Password", type="password", value=st.secrets["DB_PASS"], key="db_pass")
-    db_host = st.text_input("Host", value=st.secrets["DB_HOST"], key="db_host")
-    db_port = st.text_input("Port", value=st.secrets["DB_PORT"], key="db_port")
-    db_name = st.text_input("Name", value=st.secrets["DB_NAME"], key="db_name")
-    model = st.secrets["OPENAI_LLM_MODEL"]
-    os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+    db_user = st.text_input("User", value=settings.db_user.get_secret_value(), key="db_user")
+    db_pass = st.text_input("Password", type="password", value=settings.db_pass.get_secret_value(), key="db_pass")
+    db_host = st.text_input("Host", value=settings.db_host.get_secret_value(), key="db_host")
+    db_port = st.text_input("Port", value=int(settings.db_port.get_secret_value()), key="db_port")
+    db_name = st.text_input("Name", value=settings.db_name.get_secret_value(), key="db_name")
+    model = settings.openai_llm_model
+    os.environ["OPENAI_API_KEY"] = settings.openai_api_key.get_secret_value()
 
     if st.button("Connect"):
         try:
