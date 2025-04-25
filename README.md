@@ -44,3 +44,15 @@ Edit `var/conf/finquery/.env` with your values
 uv run streamlit run src/app.py
 ^c
 ```
+
+## Local Docker setup
+### Build and run the docker image
+```bash
+./run.sh
+```
+
+### Hit the app
+visit <http://localhost:8501>
+
+*Note*: if you're accessing a database on localhost, you might have to
+change your Host to `host.docker.internal`
