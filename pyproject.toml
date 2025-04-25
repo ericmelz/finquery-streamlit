@@ -1,0 +1,16 @@
+[project]
+name = "finquery-streamlit"
+version = "0.1.0"
+description = "AI-powered financial query application"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+    {name = "Eric Melz", email = "eric@emelz.com"}
+]
+dependencies = [
+    "langchain-community==0.3.20",
+    "langchain-openai==0.2.14",
+    "pydantic>=2.10.6",
+    "pydantic-settings>=2.8.1",
+    "streamlit>=1.24.0",
+]
