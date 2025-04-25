@@ -32,6 +32,13 @@ uv pip install -e ".[dev]"
 uv run pytest
 ```
 
+### Configure
+Copy the configuration template:
+```bash
+cp var/conf/finquery/.env.dev var/conf/finquery/.env
+```
+Edit `var/conf/finquery/.env` with your values
+
 ### Run the app
 ```bash
 uv run streamlit run src/app.py
