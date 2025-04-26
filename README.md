@@ -163,3 +163,17 @@ visit http://localhost:8899/finquery/
 ```bash
 k3d cluster delete finquery
 ```
+
+## Data
+Sample data is provided in the `data` directory.
+
+It can be loaded into a msyql instance by setting up environment variables
+```bash
+export ROOT_PASSWORD=YOUR_ROOT_PASSWORD
+export USER_PASSWORD=YOUR_DB_USER_PASSWORD
+```
+and then executing:
+```bash
+cd scripts
+envsubst < create_db.sql | mysql --local-infile=1 -uroot -p $ROOT_PASSWORD
+```
