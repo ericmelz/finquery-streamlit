@@ -23,7 +23,7 @@ docker run \
     --rm \
     --volume .:/app \
     --volume /app/.venv \
-    --publish 8501:8501 \
+    --publish 8511:8511 \
     $INTERACTIVE \
     $(docker build -q .) \
     "$@"

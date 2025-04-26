@@ -75,12 +75,12 @@ spec:
         readinessProbe:
           httpGet:
             path: /finquery/_stcore/health
-            port: 8501
+            port: 8511
           initialDelaySeconds: 5
           periodSeconds: 10
         livenessProbe:
           httpGet:
             path: /finquery/_stcore/health
-            port: 8501
+            port: 8511
           initialDelaySeconds: 5
           periodSeconds: 5

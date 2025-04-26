@@ -94,7 +94,7 @@ uv run streamlit run src/finquery_streamlit/app.py
 ```
 
 ### Hit the app
-visit <http://localhost:8501>
+visit <http://localhost:8511>
 
 *Note*: if you're accessing a database on localhost, you might have to
 change your Host to `host.docker.internal`
@@ -125,6 +125,7 @@ export GPG_PASSPHRASE=$(openssl rand -base64 32)
 
 Encrypt your credentials: 
 ```bash
+rm -f var/conf/finquery/.env.dev.gpg
 cat var/conf/finquery/.env|gpg --symmetric --cipher-alg AES256 --batch --passphrase "$GPG_PASSPHRASE" -o var/conf/finquery/.env.dev.gpg
 ```
 

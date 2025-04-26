@@ -9,6 +9,6 @@ spec:
     app: finquery
   ports:
   - port: 80
-    targetPort: 8501
+    targetPort: 8511
     name: web
   type: ClusterIP

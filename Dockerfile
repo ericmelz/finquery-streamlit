@@ -26,6 +26,6 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 ENV PATH="/app/.venv/bin:$PATH"
 
 # Reset the entrypoint, don't invoke `uv`
-ENTRYPOINT ["streamlit", "run", "src/finquery_streamlit/app.py"]
+ENTRYPOINT ["streamlit", "run", "src/finquery_streamlit/app.py", "--server.port", "8511"]
 
 # Run the streamlit application by default
