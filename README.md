@@ -124,9 +124,6 @@ Edit `var/conf/finquery/.env-docker` with your values
 ### Hit the app
 visit <http://localhost:8511>
 
-*Note*: if you're accessing a database on localhost, you might have to
-change your Host to `host.docker.internal`
-
 ## Local k3d setup
 ### Prerequisites
 - Docker installed
