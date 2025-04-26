@@ -14,6 +14,7 @@ spec:
       labels:
         app: finquery
     spec:
+      dnsPolicy: Default  # attempt to resolve dns resolution errors with e.g., api.smith.langchain.com
       volumes:
         - name: encrypted-conf
           persistentVolumeClaim:
