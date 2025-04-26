@@ -1,6 +1,8 @@
 # finquery-streamlit
 An AI-Powered Financial Query application.
 
+You can try the app at <https://emelz.ai/finquery/>
+
 - [Overview](#overview)
 - [Project Structure](#project-structure)
 - [Get the project](#get-the-project)
