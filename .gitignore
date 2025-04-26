@@ -1,5 +1,5 @@
 __pycache__
 .streamlit
-.env
-.env.dev.gpg
-.env-docker
+var/conf/finquery/.env
+var/conf/finquery/.env.dev.gpg
+var/conf/finquery/.env.docker

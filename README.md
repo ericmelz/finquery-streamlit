@@ -1,47 +1,67 @@
 # finquery-streamlit
 AI-Powered Financial Query application
 
+- [Overview](#overview)
+- [Get the project](#get-the-project)
+- [Local laptop native setup](#local-laptop-native-setup)
+- [Local Docker setup](#local-docker-setup)
+- [Local k3d setup](#local-k3d-setup)
+- [Data](#data)
+
+## Overview
+This app provides an intelligent financial agent that can help you answer questions about data stored in 
+your private database.
+You configure your MySQL database connection using the sidebar, and chat with the assistant.
+
+### Example session
+![Finquery App](doc-images/finquery-app.png)
+
+## Prerequisites
+You should have a database with some financial data.
+See the [Data](#data) section for instructions on settings up data in a local mysql database.
+
 ## Project structure
 ```aiignore
-├── .gitignore 
+├── .gitignore                    - Files that git should ignore
 ├── .github 
 │   └── workflows
-│       └── cicd.yml
-├── Dockerfile 
+│       └── cicd.yml              - CI/CD pipeline for testing, building docker image, and deploying to prod 
+├── Dockerfile                    - Instructions for building the docker image 
 ├── LICENSE
-├── README.md
-├── data
+├── README.md                     - This file
+├── data                          - Sample financial data
 │   ├── Finance Dataset Description.docx
 │   ├── accounting_transactions.csv
 │   ├── financial_transactions.csv
 │   └── sample_sales_data.csv
 ├── k8s
-│   ├── deployment.yaml
-│   ├── hostpath-pv.yaml
-│   ├── hostpath-pvc.yaml
-│   ├── ingress.yaml
-│   └── service.yaml
-├── pyproject.toml
-├── run.sh
+│   ├── deployment.yaml           - Configures volumes, initContainer for conf decryption, etc
+│   ├── hostpath-pv.yaml          - Persistent Volume for reading conf and writing logs
+│   ├── hostpath-pvc.yaml         - Persistent Volume Claim
+│   ├── ingress.yaml              - Ingress to route requests to http://<clusterip>/finquery/
+│   └── service.yaml              - Expose service on port 80
+├── pyproject.toml                - Project file containing dependencies, tool configs, and project metadata
+├── run.sh                        - Script for build and running docker in a dev environment
 ├── scripts
-│   └── create_db.sql
+│   └── create_db.sql             - Script for setting up a mysql database with sample data
 ├── src
 │   └── finquery_streamlit
-│       ├── app.py
-│       ├── db_agent.py
-│       ├── orchestrator.py
-│       ├── plotly_agent.py
-│       ├── presentation_agent.py
-│       └── settings.py
-├── tests
+│       ├── app.py                - Main streamlit app
+│       ├── db_agent.py           - Agent for handling db interactions
+│       ├── orchestrator.py       - Top-level agent used by clients that talks to other agents
+│       ├── plotly_agent.py       - Agent for generating plotly visualizations
+│       ├── presentation_agent.py - Agent for determining presentation style of output
+│       └── settings.py           - Used for configuring connections to external resources
+├── tests                         - Unit tests
 │   ├── __init__.py
 │   └── test_math.py
-├── uv.lock
+├── uv.lock                       - Locks dependencies for reproducible builds
 └── var
     ├── conf
     │   └── finquery
-    │       └── .env.dev
-    └── log
+    │       ├── .env.dev          - Configuration template for local (Pycharm) environment
+    │       └── .env.dev.docker   - Configuration template for local docker environment
+    └── log                       - Directory for log files
 ```
 ## Get the project
 Find a suitable dir (such as `~/Data/code`) and:
@@ -91,7 +111,7 @@ uv run streamlit run src/finquery_streamlit/app.py
 ### Configure
 Copy the configuration template:
 ```bash
-cp var/conf/finquery/.env.dev-docker var/conf/finquery/.env-docker
+cp var/conf/finquery/.env.dev.docker var/conf/finquery/.env.docker
 ```
 Edit `var/conf/finquery/.env-docker` with your values
 
