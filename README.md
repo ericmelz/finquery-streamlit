@@ -88,6 +88,13 @@ uv run streamlit run src/finquery_streamlit/app.py
 ```
 
 ## Local Docker setup
+### Configure
+Copy the configuration template:
+```bash
+cp var/conf/finquery/.env.dev-docker var/conf/finquery/.env-docker
+```
+Edit `var/conf/finquery/.env-docker` with your values
+
 ### Build and run the docker image
 ```bash
 ./run.sh
