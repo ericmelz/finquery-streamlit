@@ -23,6 +23,7 @@ docker run \
     --rm \
     --volume .:/app \
     --volume /app/.venv \
+    --env FINQUERY_CONF_FILE=var/conf/finquery/.env.docker \
     --publish 8511:8511 \
     $INTERACTIVE \
     $(docker build -q .) \
