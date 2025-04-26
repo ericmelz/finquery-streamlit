@@ -1,6 +1,48 @@
 # finquery-streamlit
 AI-Powered Financial Query application
 
+## Project structure
+```aiignore
+├── .gitignore 
+├── .github 
+│   └── workflows
+│       └── cicd.yml
+├── Dockerfile 
+├── LICENSE
+├── README.md
+├── data
+│   ├── Finance Dataset Description.docx
+│   ├── accounting_transactions.csv
+│   ├── financial_transactions.csv
+│   └── sample_sales_data.csv
+├── k8s
+│   ├── deployment.yaml
+│   ├── hostpath-pv.yaml
+│   ├── hostpath-pvc.yaml
+│   ├── ingress.yaml
+│   └── service.yaml
+├── pyproject.toml
+├── run.sh
+├── scripts
+│   └── create_db.sql
+├── src
+│   └── finquery_streamlit
+│       ├── app.py
+│       ├── db_agent.py
+│       ├── orchestrator.py
+│       ├── plotly_agent.py
+│       ├── presentation_agent.py
+│       └── settings.py
+├── tests
+│   ├── __init__.py
+│   └── test_math.py
+├── uv.lock
+└── var
+    ├── conf
+    │   └── finquery
+    │       └── .env.dev
+    └── log
+```
 ## Get the project
 Find a suitable dir (such as `~/Data/code`) and:
 ```bash
