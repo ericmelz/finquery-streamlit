@@ -1,7 +1,8 @@
 # finquery-streamlit
-AI-Powered Financial Query application
+An AI-Powered Financial Query application.
 
 - [Overview](#overview)
+- [Project Structure](#project-structure)
 - [Get the project](#get-the-project)
 - [Local laptop native setup](#local-laptop-native-setup)
 - [Local Docker setup](#local-docker-setup)
@@ -25,7 +26,7 @@ See the [Data](#data) section for instructions on settings up data in a local my
 ├── .gitignore                    - Files that git should ignore
 ├── .github 
 │   └── workflows
-│       └── cicd.yml              - CI/CD pipeline for testing, building docker image, and deploying to prod 
+│       └── cicd.yml              - CI/CD pipeline for testing, building, and deploying to prod 
 ├── Dockerfile                    - Instructions for building the docker image 
 ├── LICENSE
 ├── README.md                     - This file
